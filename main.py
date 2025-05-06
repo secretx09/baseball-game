@@ -11,3 +11,6 @@ class Game:
 
     outs = 0
     inning = 0
+    
+    if r == [1, 5]:
+        print("test success")
