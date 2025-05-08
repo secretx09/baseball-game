@@ -1,7 +1,4 @@
-first_base = "@"
 second_base = "@"
-third_base = "@"
-home_plate = "@"
 
 baseball_field = f"""                                    
                                                  ..                                                 
