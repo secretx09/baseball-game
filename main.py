@@ -1,4 +1,5 @@
 import random
+import field 
 
 class Score: 
     def __init__(self):
@@ -12,7 +13,7 @@ class Game:
         #0 means empty
         self.base_1 = 0
 
-    def roll():
+    def roll(self):
         return [random.randint(1, 6) for i in range(2)] #ex: [4,2]
     
 
@@ -24,36 +25,51 @@ class Game:
             return "Homerun"
 
         elif r == [1, 2] or r == [2, 1] or r == [5, 5]:
-            print("Double")
+            return "Double"
 
-        elif r == [1, 3] or r == [3, 1] or r == [3, 6] or r == [6, 3]:
-            print("Fly Out")
+        elif r == [1, 3] or r == [3, 1]:
+            return "Fly Out"
 
         elif r == [1, 4] or r == [4, 1] or r == [3, 3] or r == [4, 4]:
-            print("Walk")
+            return "Walk"
 
         elif r == [1, 5] or r == [5, 1] or r == [4, 5] or r == [5, 4]:
-            print("Pop Out")
+            return "Pop Out"
 
-        elif r == [1, 6] or r == [6, 1] or r == [2, 5] or r == [5, 2]:
-            print("Single")
+        elif r == [1, 6] or r == [6, 1]:
+            return "Single"
 
         elif r == [2, 2]:
-            print("Double Play")
+            return "Double Play"
 
-        elif r == [2, 3] or r == [3, 2] or r == [3, 5] or r == [5, 3]:
-            print("Groundout")
+        elif r == [2, 3] or r == [3, 2]:
+            return "Groundout"
         
-        elif r == [2, 4] or r == [4, 2] or r == [2, 6] or r == [6, 2] or r == [4, 6] or r == [6, 4]:
-            print("Strikeout")
+        elif r == [2, 4] or r == [4, 2]:
+            return "Strikeout"
 
         elif r == [3, 4] or r == [4, 3]:
-            print("Triple")
+            return "Triple"
 
         elif r == [5, 6] or r == [6, 5]:
-            print("Sacrifice Fly")
+            return "Sacrifice Fly"
+
+        elif r == [2, 6] or r == [6, 2]:
+            return "Dropped Third Strike" #Make chances of being safe or out
+        
+        elif r == [4, 6] or r == [6, 4]:
+            return "Pickoff" #Make chances of being safe or not
+        
+        elif r == [3, 5] or r == [5, 3]:
+            return "Passed Ball"
+        
+        elif r == [3, 6] or r == [6, 3]: 
+            return "Strike"
+        
+        elif r == [2, 5] or r == [5, 2]:
+            return "Ball"
+
 
 class Team:
     def __init__(self):
         self.runs = 0 
-        #self.bench = ["player4", ]

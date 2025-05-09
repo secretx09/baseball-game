@@ -1,0 +1,11 @@
+1. Add chances for dropped third strike
+
+2. Make pickoff for the pitcher
+
+3. Add 2 player functionality
+
+4. Ask batter if they want to roll or steal
+
+5. Add scoreboard
+
+6. Make it so runners can be on base and it fills in
