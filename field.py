@@ -27,7 +27,7 @@ class Field():
                           =@=        -@*                      *@-        =@=                         
                             *@- . :@#          .*%%*.          #@: .  -@*                           
                               .{third_base}{third_base}{third_base}{third_base}.           +@@@@@@+          {first_base}{first_base}{first_base}{first_base}                           
-                            :{third_base}{third_base}{third_base}{third_base}{third_base}{third_base}-          @@@@@@@@          -{first_base}{first_base}{first_base}{first_base}{first_base}{first_base}:                            
+                             :{third_base}{third_base}{third_base}{third_base}{third_base}{third_base}-          @@@@@@@@          -{first_base}{first_base}{first_base}{first_base}{first_base}{first_base}:                            
                                 {third_base}{third_base}{third_base}            *@@@@@@*            {first_base}{first_base}{first_base}                              
                                 :. -@*          :*@@*:          *@- :.                               
                                       +@=                      =@+                                    
@@ -37,9 +37,9 @@ class Field():
                                             -@*        *@-                                           
                                               =@= :: =@=
                                                 *{home_plate}{home_plate}{home_plate}{home_plate}*                                               
-                                                :{home_plate}{home_plate}{home_plate}{home_plate}{home_plate}{home_plate}:                                              
-                                                  -{home_plate}{home_plate} =                                                 
-                                                    .
+                                               :{home_plate}{home_plate}{home_plate}{home_plate}{home_plate}{home_plate}:                                              
+                                                 -{home_plate}{home_plate} =                                                 
+                                                   .
                                                                                                                                                                       
   """
 
