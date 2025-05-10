@@ -30,7 +30,7 @@ class Game:
         elif r == [1, 3] or r == [3, 1]:
             return "Fly Out"
 
-        elif r == [1, 4] or r == [4, 1] or r == [3, 3] or r == [4, 4]:
+        elif r == [1, 4] or r == [4, 1]:
             return "Walk"
 
         elif r == [1, 5] or r == [5, 1] or r == [4, 5] or r == [5, 4]:
@@ -55,7 +55,7 @@ class Game:
             return "Sacrifice Fly"
 
         elif r == [2, 6] or r == [6, 2]:
-            return "Dropped Third Strike" #Make chances of being safe or out
+            return "Dropped Third Strike" #Make chances of being safe or not
         
         elif r == [4, 6] or r == [6, 4]:
             return "Pickoff" #Make chances of being safe or not
@@ -68,6 +68,9 @@ class Game:
         
         elif r == [2, 5] or r == [5, 2]:
             return "Ball"
+        
+        elif r == [3, 3] or r == [4, 4]:
+            return "Bunt" #Make chances of being safe or not
 
 
 class Team:
