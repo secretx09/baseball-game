@@ -1,5 +1,5 @@
 import random
-import field 
+import field
 
 class Score: 
     def __init__(self):
@@ -31,6 +31,8 @@ class Game:
             return "Pop Out"
         
         elif r == [1, 6] or r == [6, 1]:
+            field.first_base == "@"
+            print(field.Field.baseball_field)
             return "Single"
         
         elif r == [2, 2]:

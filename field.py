@@ -42,5 +42,3 @@ class Field():
                                                    .
                                                                                                                                                                       
   """
-
-  print(baseball_field)
