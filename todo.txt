@@ -8,4 +8,6 @@
 
 5. Add scoreboard
 
-6. Make it so runners can be on base and it fills in
+6. Runners advance on hits
+
+7. Runners can get out
