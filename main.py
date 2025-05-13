@@ -1,5 +1,5 @@
 import random
-import field
+from field import Field
 
 class Score: 
     def __init__(self):
@@ -9,6 +9,7 @@ class Game:
     def __init__(self):
         self.outs = 0
         self.inning = 0
+        self.field = Field()
     
     def roll(self):
         return [random.randint(1, 6) for i in range(2)]  # ex: [4,2]
@@ -19,6 +20,8 @@ class Game:
             return "Homerun"
         
         elif r == [1, 2] or r == [2, 1] or r == [5, 5]:
+            self.field.fill_base(2)
+            self.field.display()
             return "Double"
         
         elif r == [1, 3] or r == [3, 1]:
@@ -31,8 +34,8 @@ class Game:
             return "Pop Out"
         
         elif r == [1, 6] or r == [6, 1]:
-            field.first_base == "@"
-            print(field.Field.baseball_field)
+            self.field.fill_base(1)
+            self.field.display()
             return "Single"
         
         elif r == [2, 2]:
@@ -45,6 +48,8 @@ class Game:
             return "Strikeout"
         
         elif r == [3, 4] or r == [4, 3]:
+            self.field.fill_base(3)
+            self.field.display()
             return "Triple"
         
         elif r == [5, 6] or r == [6, 5]:
