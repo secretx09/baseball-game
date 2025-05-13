@@ -74,8 +74,13 @@ class Game:
             return "Bunt"
 
     def run_game(self):
-        result = self.handle_roll()
-        print(f"Roll result: {result}")
+        while True:
+            result = self.handle_roll()
+            print(f"Roll result: {result}")
+            # Ask if they want to roll again
+            roll_again = input("Do you want to roll again? yes/no: ").strip().lower()
+            if roll_again != 'yes':
+                break
 
 # Main execution
 if __name__ == "__main__":
