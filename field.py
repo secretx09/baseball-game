@@ -55,3 +55,15 @@ class Field():
             self.second_base = "@"
         if base_num == 3:
             self.third_base = "@"
+
+    def empty_base(self, base):
+        if base == 0:
+            self.first_base = " "
+            self.second_base = " "
+            self.third_base = " "
+        if base == 1:
+            self.first_base = " "
+        if base == 2:
+            self.second_base = " "
+        if base == 3:
+            self.third_base = " "

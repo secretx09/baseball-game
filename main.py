@@ -17,6 +17,8 @@ class Game:
     def handle_roll(self):
         r = self.roll()
         if r == [1, 1] or r == [6, 6]:
+            self.field.empty_base(0)
+            self.field.display()
             return "Homerun"
         
         elif r == [1, 2] or r == [2, 1] or r == [5, 5]:
