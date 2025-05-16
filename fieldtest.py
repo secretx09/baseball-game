@@ -1,3 +1,4 @@
+# field.py
 
 home_plate = " "
 
@@ -7,6 +8,7 @@ class Field():
         self.second_base = " "
         self.third_base = " "
         self.display()
+
     def display(self):
         self.baseball_field = f"""                                    
                                                       ..                                                 
@@ -62,12 +64,20 @@ class Field():
             self.first_base = " "
             self.second_base = " "
             self.third_base = " "
-
         elif base == 1:
             self.first_base = " "
-
         elif base == 2:
             self.second_base = " "
-            
         elif base == 3:
             self.third_base = " "
+
+    def print_players_on_base(self):
+        players_on_base = 0
+        if self.first_base == "@":
+            players_on_base += 1
+        if self.second_base == "@":
+            players_on_base += 1
+        if self.third_base == "@":
+            players_on_base += 1
+        
+        print(f"Players on base: {players_on_base}")
