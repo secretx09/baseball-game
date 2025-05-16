@@ -56,26 +56,18 @@ class Field():
         elif base_num == 3:
             self.third_base = "@"
         self.print_players_on_base()  # Call the new method to print players on base
+
     def empty_base(self, base):
         if base == 0:
             self.first_base = " "
             self.second_base = " "
             self.third_base = " "
+
         elif base == 1:
             self.first_base = " "
+
         elif base == 2:
             self.second_base = " "
+            
         elif base == 3:
             self.third_base = " "
-        self.print_players_on_base()  # Call the new method to print players on base
-
-    def print_players_on_base(self):
-        players_on_base = 0
-        if self.first_base == "@":
-            players_on_base += 1
-        if self.second_base == "@":
-            players_on_base += 1
-        if self.third_base == "@":
-            players_on_base += 1
-        
-        print(f"Players on base: {players_on_base}")

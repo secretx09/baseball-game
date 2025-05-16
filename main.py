@@ -79,11 +79,22 @@ class Game:
         while True:
             result = self.handle_roll()
             print(f"Roll result: {result}")
+            self.print_players_on_base()
             # Ask if they want to roll again
             roll_again = input("Do you want to roll again? yes/no: ").strip().lower()
             if roll_again != 'yes':
                 break
 
+    def print_players_on_base(self):
+        players_on_base = 0
+        if self.field.first_base == "@":
+            players_on_base += 1
+        if self.field.second_base == "@":
+            players_on_base += 1
+        if self.field.third_base == "@":
+            players_on_base += 1
+        
+        print(f"Players on base: {players_on_base}")
 # Main execution
 if __name__ == "__main__":
     game = Game()
