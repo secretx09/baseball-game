@@ -22,14 +22,13 @@ class Game:
         self.inning = 1
         self.field = Field()
         self.score = Score()
-        self.current_player = 1  # 1 or 2
-        self.bases = [False, False, False]  # first, second, third base occupancy
+        self.current_player = 1
+        self.bases = [False, False, False] #First, Second, Third
 
     def roll(self):
         return sorted([random.randint(1, 6), random.randint(1, 6)])
 
     def advance_runners(self, bases_to_advance):
-        # Advance runners bases_to_advance bases and score if they reach home
         for i in reversed(range(3)):
             if self.bases[i]:
                 new_pos = i + bases_to_advance
@@ -181,7 +180,7 @@ class Game:
             self.handle_out("Groundout")
             return "Groundout"
 
-        elif r == [2, 4] or r == [4, 2]:
+        elif r == [2, 4] or r == [4, 2] or r == [2, 6] or r == [6, 2]:
             # Handle dropped third strike chance 50%
             if random.random() < 0.5:
                 print("Dropped Third Strike!")
