@@ -64,10 +64,10 @@ class Game:
         self.score.display_score()
         self.field.display()
         # After 7 innings check if game should end
-        if self.inning > 7:
+        if self.inning > 9:
             if self.score.home_runs != self.score.away_runs:
                 winner = 1 if self.score.home_runs > self.score.away_runs else 2
-                print(f"Game over! Player {winner} is winning after 7 innings.")
+                print(f"Game over! Player {winner} won after {self.inning - 1} innings.")
                 exit(0)
 
     def attempt_steal(self):
