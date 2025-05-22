@@ -286,7 +286,6 @@ class Game:
 
             print(f"Result: {result}")
             self.score.display_score()
-            self.field.display()
 
             if self.outs >= 3:
                 print("Inning over.")
