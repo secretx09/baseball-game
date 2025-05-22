@@ -116,8 +116,24 @@ class Game:
             self.handle_hit(4)
             if self.current_player == 1:
                 self.score.home_hits += 1
+                if self.field.empty_base(0):
+                    self.score.home_runs += 1
+                if self.field.fill_base(1):
+                    self.score.home_runs += 2
+                if self.field.fill_base(2):
+                    self.score.home_runs += 3
+                if self.field.fill_base(3):
+                    self.score.home_runs += 4
             else:
                 self.score.away_hits += 1
+                if self.field.empty_base(0):
+                    self.score.away_runs += 1
+                if self.field.fill_base(1):
+                    self.score.away_runs += 2
+                if self.field.fill_base(2):
+                    self.score.away_runs += 3
+                if self.field.fill_base(3):
+                    self.score.away_runs += 4
             self.field.empty_base(0)
             self.update_bases_on_field()
             return "Homerun"
