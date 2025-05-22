@@ -46,7 +46,6 @@ class Field():
                                                       .
                                                                                                                                                                           
         """
-        print(self.baseball_field)
 
     def fill_base(self, base_num):
         if base_num == 1:
