@@ -1,5 +1,9 @@
+import os
 import random
 from field import Field
+
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 class Score: 
     def __init__(self):
@@ -63,7 +67,7 @@ class Game:
             self.inning += 1  # increment inning only after both players have played
         self.score.display_score()
         self.field.display()
-        # After 7 innings check if game should end
+        # After 9 innings check if game should end
         if self.inning > 9:
             if self.score.home_runs != self.score.away_runs:
                 winner = 1 if self.score.home_runs > self.score.away_runs else 2
@@ -271,6 +275,7 @@ class Game:
 
     def run_game(self):
         while True:
+            clear_screen()
             print(f"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPlayer {self.current_player}'s turn. Outs: {self.outs}, Inning: {self.inning}")
             action = input("Do you want to 'roll' or 'steal'? ").strip().lower()
             if action == "roll":
@@ -284,14 +289,14 @@ class Game:
 
             print(f"Result: {result}")
             self.score.display_score()
-            self.field.display
+            self.field.display()
 
             if self.outs >= 3:
                 print("Inning over.")
                 self.end_inning()
 
+
 # Main execution
 if __name__ == "__main__":
     game = Game()
     game.run_game()
-
