@@ -273,7 +273,7 @@ class Game:
 
     def run_game(self):
         while True:
-            print(f"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPlayer {self.current_player}'s turn. Outs: {self.outs}, Inning: {self.inning}")
+            print(f"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPlayer {self.current_player}'s turn. Outs: {self.outs}, Inning: {self.inning}")
             action = input("Do you want to 'roll' or 'steal'? ").strip().lower()
             if action == "roll":
                 result = self.handle_roll()
