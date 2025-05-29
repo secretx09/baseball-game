@@ -16,6 +16,8 @@ class Score:
 |Player 1 - Runs: {self.home_runs} | Hits: {self.home_hits}|
 |Player 2 - Runs: {self.away_runs} | Hits: {self.away_hits}|\n""")
 
+innings = int(input("How many innings would you like to play? >> "))
+
 class Game:
     def __init__(self):
         self.outs = 0
@@ -63,8 +65,8 @@ class Game:
             self.inning += 1  # increment inning only after both players have played
         self.score.display_score()
         self.field.display()
-        # After 7 innings check if game should end
-        if self.inning > 9:
+        # After requested amount of innings pass, game should end
+        if self.inning > innings:
             if self.score.home_runs != self.score.away_runs:
                 winner = 1 if self.score.home_runs > self.score.away_runs else 2
                 print(f"Game over! Player {winner} won after {self.inning - 1} innings.")
