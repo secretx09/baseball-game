@@ -1,5 +1,9 @@
 import random
 from field import Field
+import os
+
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 class Score: 
     def __init__(self):
@@ -11,21 +15,25 @@ class Score:
         else:
             self.away_runs += 1
 
-    def display_score(self):
+    def display_score(self, player1_name, player2_name):
         print(f"""|Scoreboard:                 |
-|Player 1 - Runs: {self.home_runs} | Hits: {self.home_hits}|
-|Player 2 - Runs: {self.away_runs} | Hits: {self.away_hits}|\n""")
+|{player1_name} - Runs: {self.home_runs} | Hits: {self.home_hits}|
+|{player2_name} - Runs: {self.away_runs} | Hits: {self.away_hits}|\n""")
 
 innings = int(input("How many innings would you like to play? >> "))
+player1_name = input("Enter name for Player 1: ")
+player2_name = input("Enter name for Player 2: ")
 
 class Game:
-    def __init__(self):
+    def __init__(self, player1_name, player2_name):
         self.outs = 0
         self.inning = 1
         self.field = Field()
         self.score = Score()
         self.current_player = 1
         self.bases = [False, False, False] #First, Second, Third
+        self.player1_name = player1_name
+        self.player2_name = player2_name
 
     def roll(self):
         return sorted([random.randint(1, 6), random.randint(1, 6)])
@@ -37,7 +45,7 @@ class Game:
                 if new_pos >= 3:
                     self.bases[i] = False
                     self.score.update_runs(self.current_player)
-                    print(f"Player {self.current_player} scored!")
+                    print(f"{self.player1_name if self.current_player == 1 else self.player2_name} scored!")
                 else:
                     self.bases[new_pos] = True
                     self.bases[i] = False
@@ -56,20 +64,20 @@ class Game:
             self.end_inning()
 
     def end_inning(self):
-        print(f"Inning {self.inning} over. Switching players.")
+        print(f"Inning {self.inning} over.")
         self.outs = 0
         self.bases = [False, False, False]
         self.field.empty_base(0)
         self.current_player = 2 if self.current_player == 1 else 1
         if self.current_player == 1:
-            self.inning += 1  # increment inning only after both players have played
-        self.score.display_score()
+            self.inning += 1  
+        self.score.display_score(self.player1_name, self.player2_name)
         self.field.display()
         # After requested amount of innings pass, game should end
         if self.inning > innings:
             if self.score.home_runs != self.score.away_runs:
                 winner = 1 if self.score.home_runs > self.score.away_runs else 2
-                print(f"Game over! Player {winner} won after {self.inning - 1} innings.")
+                print(f"Game over! {self.player1_name if winner == 1 else self.player2_name} won after {self.inning - 1} innings.")
                 exit(0)
 
     def attempt_steal(self):
@@ -273,7 +281,7 @@ class Game:
 
     def run_game(self):
         while True:
-            print(f"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPlayer {self.current_player}'s turn. Outs: {self.outs}, Inning: {self.inning}")
+            print(f"\n\n\n\n\n\n\n\n\n\nPlayer {self.current_player}'s turn. Outs: {self.outs}, Inning: {self.inning}")
             action = input("Do you want to 'roll' or 'steal'? ").strip().lower()
             if action == "roll":
                 result = self.handle_roll()
@@ -283,9 +291,10 @@ class Game:
             else:
                 print("Invalid action. Please type 'roll' or 'steal'.")
                 continue
+            clear_screen()
 
             print(f"Result: {result}")
-            self.score.display_score()
+            self.score.display_score(self.player1_name, self.player2_name)
             self.field.display
 
             if self.outs >= 3:
@@ -294,6 +303,6 @@ class Game:
 
 # Main execution
 if __name__ == "__main__":
-    game = Game()
+    game = Game(player1_name, player2_name)
     game.run_game()
 
