@@ -195,7 +195,7 @@ class Game:
 
         elif r == [2, 2]:
             # Double play
-            if self.outs < 2:
+            if self.outs < 2 and self.bases[0] or self.bases[1] or self.bases[2]:
                 print("Double Play!")
                 self.handle_out("Out 1 (Double Play)")
                 self.handle_out("Out 2 (Double Play)")
@@ -286,7 +286,7 @@ class Game:
 
     def run_game(self):
         while True:
-            print(f"\n\n\n\n\n\n\n\n\n\n{self.player1_name if self.current_player == 1 else self.player2_name}'s turn. Outs: {self.outs}, Inning: {self.inning}")
+            print(f"\n\n\n{self.player1_name if self.current_player == 1 else self.player2_name}'s turn. Outs: {self.outs}, Inning: {self.inning}")
             action = input("Do you want to 'roll' or 'steal'? ").strip().lower()
             if action == "roll":
                 result = self.handle_roll()
