@@ -1,13 +1,8 @@
 1. Add chances for dropped third strike
-
-2. Make pickoff for the pitcher
-
-3. Add 2 player functionality
-
-4. Ask batter if they want to roll or steal
-
-5. Add scoreboard
-
-6. Runners advance on hits
-
-7. Runners can get out
+2. Add chances of bunt being safe, instead of it always being safe
+3. Make it so you can steal from any base instead of only first
+4. Sac fly advances from 2nd base as well
+5. If away team is losing in 9th and doesn't come back, game ends
+6. Fix double plays sometimes leaving people on base
+7. Randomize who is home and away
+8. Option to vs cpu
