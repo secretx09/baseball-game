@@ -195,10 +195,15 @@ class Game:
 
         elif r == [2, 2]:
             # Double play
-            print("Double Play!")
-            self.handle_out("Out 1 (Double Play)")
-            self.handle_out("Out 2 (Double Play)")
-            return "Double Play"
+            if self.outs < 2 and self.bases[0] or self.bases[1] or self.bases[2]:
+                print("Double Play!")
+                self.handle_out("Out 1 (Double Play)")
+                self.handle_out("Out 2 (Double Play)")
+                return "Double Play"
+            else: 
+                self.handle_out("Groundout")
+                return "Groundout"
+  
 
         elif r == [2, 3] or r == [3, 2]:
             self.handle_out("Groundout")
@@ -281,7 +286,7 @@ class Game:
 
     def run_game(self):
         while True:
-            print(f"\n\n\n\n\n\n\n\n\n\nPlayer {self.current_player}'s turn. Outs: {self.outs}, Inning: {self.inning}")
+            print(f"\n\n\n{self.player1_name if self.current_player == 1 else self.player2_name}'s turn. Outs: {self.outs}, Inning: {self.inning}")
             action = input("Do you want to 'roll' or 'steal'? ").strip().lower()
             if action == "roll":
                 result = self.handle_roll()
@@ -295,7 +300,7 @@ class Game:
 
             print(f"Result: {result}")
             self.score.display_score(self.player1_name, self.player2_name)
-            self.field.display
+            self.field.display()
 
             if self.outs >= 3:
                 print("Inning over.")
@@ -305,4 +310,3 @@ class Game:
 if __name__ == "__main__":
     game = Game(player1_name, player2_name)
     game.run_game()
-
