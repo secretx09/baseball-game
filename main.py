@@ -34,6 +34,8 @@ class Game:
         self.bases = [False, False, False] #First, Second, Third
         self.player1_name = player1_name
         self.player2_name = player2_name
+        self.strikes = 0
+        self.balls = 0
 
     def roll(self):
         return sorted([random.randint(1, 6), random.randint(1, 6)])
@@ -233,13 +235,21 @@ class Game:
             return "Groundout"
 
         elif r == [2, 4] or r == [4, 2] or r == [2, 6] or r == [6, 2]:
-            # Handle dropped third strike chance 50%
-            if random.random() < 0.5:
-                print("Dropped Third Strike!")
-                return "Dropped Third Strike"
+            print("Catchers Interference!")
+            if self.bases[0]:
+                if self.bases[1]:
+                    if self.bases[2]:
+                        self.score.update_runs(self.current_player)
+                        print(f"Player {self.current_player} scored from catchers interference!")
+                    self.bases[2] = self.bases[1]
+                self.bases[1] = self.bases[0]
+            self.bases[0] = True
+            if self.current_player == 1:
+                self.score.home_hits += 1
             else:
-                self.handle_out("Strikeout")
-                return "Strikeout"
+                self.score.away_hits += 1
+            self.update_bases_on_field()
+            return "Catchers Interference"
 
         elif r == [3, 4] or r == [4, 3]:
             print("Triple!")
@@ -284,13 +294,37 @@ class Game:
 
         elif r == [3, 6] or r == [6, 3]:
             print("Strike!")
-            # Optionally count strikes here
-            return "Strike"
+            self.strikes + 1
+            if self.strikes == 3:
+                print("Strikeout!")
+                self.outs + 1
+                return "Strikeout"
+            else:
+                return "Strike"
 
         elif r == [2, 5] or r == [5, 2]:
             print("Ball!")
-            # Optionally count balls here
-            return "Ball"
+            self.balls + 1
+            if self.balls == 4:
+                print("Walk on balls")
+                # Batter takes first base, force runners to advance if needed
+                if self.bases[0]:
+                    if self.bases[1]:
+                        if self.bases[2]:
+                            # Runner on third scores
+                            self.score.update_runs(self.current_player)
+                            print(f"Player {self.current_player} scored from walk!")
+                        self.bases[2] = self.bases[1]
+                    self.bases[1] = self.bases[0]
+                self.bases[0] = True
+                if self.current_player == 1:
+                    self.score.home_hits += 1
+                else:
+                    self.score.away_hits += 1
+                self.update_bases_on_field()
+                return "Walk"
+            else:
+                return "Ball"
 
         elif r == [3, 3] or r == [4, 4]:
             print("Bunt!")
