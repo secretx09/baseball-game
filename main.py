@@ -81,28 +81,51 @@ class Game:
                 exit(0)
 
     def attempt_steal(self):
-        if not self.bases[0]:
-            print("No runner on first to steal.")
+        # Check if there are runners on any base
+        if not any(self.bases):
+            print("No runners to steal.")
             return
-        steal_roll = random.randint(1, 6)
-        if steal_roll >= 4:
-            print("Steal successful!")
-            if not self.bases[1]:
+
+        if self.bases[0]:
+            print("Attempting to steal from 1st base.")
+            steal_roll = random.randint(1, 6)
+            if steal_roll >= 4:
+                print("Steal from 1st successful!")
                 self.bases[1] = True
                 self.bases[0] = False
             else:
-                # Advance runners if second base is occupied
-                self.advance_runners(1)
-                self.bases[1] = True
+                print("Steal from 1st failed. Runner out.")
                 self.bases[0] = False
-        else:
-            print("Steal failed. Runner out.")
-            self.bases[0] = False
-            self.handle_out("Steal Out")
+                self.handle_out("Steal Out")
+        
+        if self.bases[1]:
+            print("Attempting to steal from 2nd base.")
+            steal_roll = random.randint(1, 6)
+            if steal_roll >= 4:
+                print("Steal from 2nd successful!")
+                self.bases[2] = True 
+                self.bases[1] = False
+            else:
+                print("Steal from 2nd failed. Runner out.")
+                self.bases[1] = False
+                self.handle_out("Steal Out")
+        
+        if self.bases[2]:
+            print("Attempting to steal from 3rd base.")
+            steal_roll = random.randint(1, 6)
+            if steal_roll >= 4:
+                print("Steal from 3rd successful! Player scores!")
+                self.score.update_runs(self.current_player)
+                self.bases[2] = False
+            else:
+                print("Steal from 3rd failed. Runner out.")
+                self.bases[2] = False
+                self.handle_out("Steal Out")
+
         self.update_bases_on_field()
 
+
     def update_bases_on_field(self):
-        # Update the Field object's first, second and third bases
         if self.bases[0]:
             self.field.fill_base(1)
         else:
