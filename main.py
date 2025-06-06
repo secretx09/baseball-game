@@ -36,6 +36,7 @@ class Game:
         self.player2_name = player2_name
         self.strikes = 0
         self.balls = 0
+        self.homeruns = 0
 
     def roll(self):
         return sorted([random.randint(1, 6), random.randint(1, 6)])
@@ -148,6 +149,8 @@ class Game:
         # Specific outcomes based on sorted dice roll
         if r == [1, 1] or r == [6, 6]:
             print("Homerun!")
+            self.homeruns + 1
+            print(self.homeruns)
             self.handle_hit(4)
             if self.current_player == 1:
                 self.score.home_hits += 1
