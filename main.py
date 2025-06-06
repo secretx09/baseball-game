@@ -223,7 +223,7 @@ class Game:
 
         elif r == [2, 2]:
             # Double play
-            if self.outs < 2 and self.bases[0] or self.bases[1] or self.bases[2]:
+            if self.outs < 2 and ((self.bases[0]) or (self.bases[1]) or (self.bases[2])):
                 print("Double Play!")
                 self.handle_out("Out 1 (Double Play)")
                 self.handle_out("Out 2 (Double Play)")
@@ -237,7 +237,7 @@ class Game:
             self.handle_out("Groundout")
             return "Groundout"
 
-        elif r == [2, 4] or r == [4, 2] or r == [2, 6] or r == [6, 2]:
+        elif r == [2, 4] or r == [4, 2]:
             print("Catchers Interference!")
             if self.bases[0]:
                 if self.bases[1]:
@@ -271,9 +271,14 @@ class Game:
                 self.bases[2] = False
                 self.score.update_runs(self.current_player)
                 print(f"Player {self.current_player} scored on Sacrifice Fly!")
+            
+
+            elif self.bases[1]:
+                self.bases[2] = True
+                self.bases[1] = False
+
             self.update_bases_on_field()
             return "Sacrifice Fly"
-
         elif r == [4, 6] or r == [6, 4]:
             # Pickoff attempt, 50% success
             if self.bases[0]:
@@ -339,6 +344,19 @@ class Game:
                 self.score.away_hits += 1
             self.update_bases_on_field()
             return "Bunt"
+        
+        elif r == [2, 6] or r == [6, 2]:
+            if self.outs == 0 and ((self.bases[0] and self.bases[1]) or (self.bases[1] and self.bases[2])):
+                print("TRIPLE PLAY")
+                self.outs = 3
+            if self.outs < 2 and ((self.bases[0]) or (self.bases[1]) or (self.bases[2])):
+                print("Double Play!")
+                self.handle_out("Out 1 (Double Play)")
+                self.handle_out("Out 2 (Double Play)")
+                return "Double Play"
+            else:
+                self.handle_out("Groundout")
+                return "Groundout"
 
         else:
             print("Unknown roll.")
