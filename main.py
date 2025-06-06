@@ -89,7 +89,7 @@ class Game:
         if self.bases[0]:
             print("Attempting to steal from 1st base.")
             steal_roll = random.randint(1, 6)
-            if steal_roll >= 4:
+            if steal_roll == 1 or steal_roll == 3 or steal_roll == 5:
                 print("Steal from 1st successful!")
                 self.bases[1] = True
                 self.bases[0] = False
@@ -101,7 +101,7 @@ class Game:
         if self.bases[1]:
             print("Attempting to steal from 2nd base.")
             steal_roll = random.randint(1, 6)
-            if steal_roll >= 4:
+            if steal_roll == 2 or steal_roll == 5:
                 print("Steal from 2nd successful!")
                 self.bases[2] = True 
                 self.bases[1] = False
@@ -113,7 +113,7 @@ class Game:
         if self.bases[2]:
             print("Attempting to steal from 3rd base.")
             steal_roll = random.randint(1, 6)
-            if steal_roll >= 4:
+            if steal_roll == 4:
                 print("Steal from 3rd successful! Player scores!")
                 self.score.update_runs(self.current_player)
                 self.bases[2] = False
