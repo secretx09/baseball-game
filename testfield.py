@@ -16,21 +16,21 @@ class Field():
                                                      *{self.second_base}{self.second_base}{self.second_base}{self.second_base}*                                            
                                                    -@* -- *@-                                          
                                                  .@%        %@.                                        
-                                              .%%.          .%%.                                     
-                                             *@-              -@*                                    
-                                           =@=                  =@=                                   
-                                         -@*                      *@-                                 
-                                     . :@#          .*%%*.          #@: .                             
+                                              .%%.           .%%.                                     
+                                             *@-               -@*                                    
+                                           =@=                   =@=                                   
+                                         -@*                       *@-                                 
+                                     . :@#          .*%%*.           #@: .                             
                                    .{self.third_base}{self.third_base}{self.third_base}{self.third_base}.           +@@@@@@+          {self.first_base}{self.first_base}{self.first_base}{self.first_base}                           
                                   :{self.third_base}{self.third_base}{self.third_base}{self.third_base}{self.third_base}{self.third_base}-          @@@@@@@@          -{self.first_base}{self.first_base}{self.first_base}{self.first_base}{self.first_base}{self.first_base}:                            
                                     {self.third_base}{self.third_base}{self.third_base}            *@@@@@@*            {self.first_base}{self.first_base}{self.first_base}                              
                                       :. -@*          :*@@*:          *@- :.                               
-                                          +@=                      =@+                                    
-                                            *@:                  :@*                                      
-                                            .#@.              :@#.                                       
+                                          +@=                       =@+                                    
+                                            *@:                   :@*                                      
+                                            .#@.               :@#.                                       
                                               :%#.          .#%:                                         
-                                                -@*        *@-                                           
-                                                  =@= :: =@=
+                                                -@*       *@-                                           
+                                                  =@= ::=@=
                                                     *{home_plate}{home_plate}{home_plate}{home_plate}*                                               
                                                    :{home_plate}{home_plate}{home_plate}{home_plate}{home_plate}{home_plate}:                                              
                                                     -{home_plate}{home_plate}  =                                                 
