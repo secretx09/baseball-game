@@ -1,5 +1,5 @@
 import random
-from field import Field
+from testfield import Field
 import os
 
 def clear_screen():
@@ -34,6 +34,9 @@ class Game:
         self.bases = [False, False, False] #First, Second, Third
         self.player1_name = player1_name
         self.player2_name = player2_name
+        self.strikes = 0
+        self.balls = 0
+        self.homeruns = 0
 
     def roll(self):
         return sorted([random.randint(1, 6), random.randint(1, 6)])
@@ -81,28 +84,51 @@ class Game:
                 exit(0)
 
     def attempt_steal(self):
-        if not self.bases[0]:
-            print("No runner on first to steal.")
+        # Check if there are runners on any base
+        if not any(self.bases):
+            print("No runners to steal.")
             return
-        steal_roll = random.randint(1, 6)
-        if steal_roll >= 4:
-            print("Steal successful!")
-            if not self.bases[1]:
+
+        if self.bases[0]:
+            print("Attempting to steal from 1st base.")
+            steal_roll = random.randint(1, 6)
+            if steal_roll == 1 or steal_roll == 3 or steal_roll == 5:
+                print("Steal from 1st successful!")
                 self.bases[1] = True
                 self.bases[0] = False
             else:
-                # Advance runners if second base is occupied
-                self.advance_runners(1)
-                self.bases[1] = True
+                print("Steal from 1st failed. Runner out.")
                 self.bases[0] = False
-        else:
-            print("Steal failed. Runner out.")
-            self.bases[0] = False
-            self.handle_out("Steal Out")
+                self.handle_out("Steal Out")
+        
+        if self.bases[1]:
+            print("Attempting to steal from 2nd base.")
+            steal_roll = random.randint(1, 6)
+            if steal_roll == 2 or steal_roll == 5:
+                print("Steal from 2nd successful!")
+                self.bases[2] = True 
+                self.bases[1] = False
+            else:
+                print("Steal from 2nd failed. Runner out.")
+                self.bases[1] = False
+                self.handle_out("Steal Out")
+        
+        if self.bases[2]:
+            print("Attempting to steal from 3rd base.")
+            steal_roll = random.randint(1, 6)
+            if steal_roll == 4:
+                print("Steal from 3rd successful! Player scores!")
+                self.score.update_runs(self.current_player)
+                self.bases[2] = False
+            else:
+                print("Steal from 3rd failed. Runner out.")
+                self.bases[2] = False
+                self.handle_out("Steal Out")
+
         self.update_bases_on_field()
 
+
     def update_bases_on_field(self):
-        # Update the Field object's first, second and third bases
         if self.bases[0]:
             self.field.fill_base(1)
         else:
@@ -123,6 +149,8 @@ class Game:
         # Specific outcomes based on sorted dice roll
         if r == [1, 1] or r == [6, 6]:
             print("Homerun!")
+            self.homeruns + 1
+            print(self.homeruns)
             self.handle_hit(4)
             if self.current_player == 1:
                 self.score.home_hits += 1
@@ -195,7 +223,7 @@ class Game:
 
         elif r == [2, 2]:
             # Double play
-            if self.outs < 2 and self.bases[0] or self.bases[1] or self.bases[2]:
+            if self.outs < 2 and ((self.bases[0]) or (self.bases[1]) or (self.bases[2])):
                 print("Double Play!")
                 self.handle_out("Out 1 (Double Play)")
                 self.handle_out("Out 2 (Double Play)")
@@ -209,14 +237,22 @@ class Game:
             self.handle_out("Groundout")
             return "Groundout"
 
-        elif r == [2, 4] or r == [4, 2] or r == [2, 6] or r == [6, 2]:
-            # Handle dropped third strike chance 50%
-            if random.random() < 0.5:
-                print("Dropped Third Strike!")
-                return "Dropped Third Strike"
+        elif r == [2, 4] or r == [4, 2]:
+            print("Catchers Interference!")
+            if self.bases[0]:
+                if self.bases[1]:
+                    if self.bases[2]:
+                        self.score.update_runs(self.current_player)
+                        print(f"Player {self.current_player} scored from catchers interference!")
+                    self.bases[2] = self.bases[1]
+                self.bases[1] = self.bases[0]
+            self.bases[0] = True
+            if self.current_player == 1:
+                self.score.home_hits += 1
             else:
-                self.handle_out("Strikeout")
-                return "Strikeout"
+                self.score.away_hits += 1
+            self.update_bases_on_field()
+            return "Catchers Interference"
 
         elif r == [3, 4] or r == [4, 3]:
             print("Triple!")
@@ -235,9 +271,14 @@ class Game:
                 self.bases[2] = False
                 self.score.update_runs(self.current_player)
                 print(f"Player {self.current_player} scored on Sacrifice Fly!")
+            
+
+            elif self.bases[1]:
+                self.bases[2] = True
+                self.bases[1] = False
+
             self.update_bases_on_field()
             return "Sacrifice Fly"
-
         elif r == [4, 6] or r == [6, 4]:
             # Pickoff attempt, 50% success
             if self.bases[0]:
@@ -261,13 +302,37 @@ class Game:
 
         elif r == [3, 6] or r == [6, 3]:
             print("Strike!")
-            # Optionally count strikes here
-            return "Strike"
+            self.strikes + 1
+            if self.strikes == 3:
+                print("Strikeout!")
+                self.outs + 1
+                return "Strikeout"
+            else:
+                return "Strike"
 
         elif r == [2, 5] or r == [5, 2]:
             print("Ball!")
-            # Optionally count balls here
-            return "Ball"
+            self.balls + 1
+            if self.balls == 4:
+                print("Walk on balls")
+                # Batter takes first base, force runners to advance if needed
+                if self.bases[0]:
+                    if self.bases[1]:
+                        if self.bases[2]:
+                            # Runner on third scores
+                            self.score.update_runs(self.current_player)
+                            print(f"Player {self.current_player} scored from walk!")
+                        self.bases[2] = self.bases[1]
+                    self.bases[1] = self.bases[0]
+                self.bases[0] = True
+                if self.current_player == 1:
+                    self.score.home_hits += 1
+                else:
+                    self.score.away_hits += 1
+                self.update_bases_on_field()
+                return "Walk"
+            else:
+                return "Ball"
 
         elif r == [3, 3] or r == [4, 4]:
             print("Bunt!")
@@ -279,6 +344,19 @@ class Game:
                 self.score.away_hits += 1
             self.update_bases_on_field()
             return "Bunt"
+        
+        elif r == [2, 6] or r == [6, 2]:
+            if self.outs == 0 and ((self.bases[0] and self.bases[1]) or (self.bases[1] and self.bases[2])):
+                print("TRIPLE PLAY")
+                self.outs = 3
+            if self.outs < 2 and ((self.bases[0]) or (self.bases[1]) or (self.bases[2])):
+                print("Double Play!")
+                self.handle_out("Out 1 (Double Play)")
+                self.handle_out("Out 2 (Double Play)")
+                return "Double Play"
+            else:
+                self.handle_out("Groundout")
+                return "Groundout"
 
         else:
             print("Unknown roll.")
@@ -286,7 +364,7 @@ class Game:
 
     def run_game(self):
         while True:
-            print(f"\n\n\n{self.player1_name if self.current_player == 1 else self.player2_name}'s turn. Outs: {self.outs}, Inning: {self.inning}")
+            print(f"{self.player1_name if self.current_player == 1 else self.player2_name}'s turn. Outs: {self.outs}, Inning: {self.inning}")
             action = input("Do you want to 'roll' or 'steal'? ").strip().lower()
             if action == "roll":
                 result = self.handle_roll()
