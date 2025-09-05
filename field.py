@@ -9,41 +9,32 @@ class Field():
         self.display()
     def display(self):
         self.baseball_field = f"""                                    
-                                                      ..                                                 
-                                          :+#@@@@@%**++===+**%@@@@@%+:                                    
-                                    -*%@#+-.                        .-+#@%*-                              
-                              .=@@#-                                      -#@@=.                         
-                            :@@#.                                              .#@@:                      
-                        =@@-                                                      -@@=                   
-                      :%@=                                                            =@%:                
-                    =@#                                                                  #@=              
-                  *@=                                                                      =@#            
-                *@-                                                                          -@*          
-              #@:                                      .                                     :@#         
-                .%%.                                  -{self.second_base}{self.second_base}-                                  .%%.          
-                  :@#                               :{self.second_base}{self.second_base}{self.second_base}{self.second_base}{self.second_base}{self.second_base}:                               #@:            
-                    -@*                              *{self.second_base}{self.second_base}{self.second_base}{self.second_base}*                              *@-              
-                      +@=                          -@* -- *@-                          =@+                
-                        *@:                      .@%        %@.                      :@*                  
-                        .#@:                  .%%.          .%%.                  .@#.                   
-                          :%#.               *@-              -@*               .#%:                     
-                            -@*            =@=                  =@=            *@-                       
-                              =@=        -@*                      *@-        =@=                         
-                                *@- . :@#          .*%%*.          #@: .  -@*                           
-                                  .{self.third_base}{self.third_base}{self.third_base}{self.third_base}.           +@@@@@@+          {self.first_base}{self.first_base}{self.first_base}{self.first_base}                           
-                                :{self.third_base}{self.third_base}{self.third_base}{self.third_base}{self.third_base}{self.third_base}-          @@@@@@@@          -{self.first_base}{self.first_base}{self.first_base}{self.first_base}{self.first_base}{self.first_base}:                            
+        
+                                                       .                                              
+                                                      -{self.second_base}{self.second_base}-                                            
+                                                    :{self.second_base}{self.second_base}{self.second_base}{self.second_base}{self.second_base}{self.second_base}:                                           
+                                                     *{self.second_base}{self.second_base}{self.second_base}{self.second_base}*                                            
+                                                   -@* -- *@-                                          
+                                                 .@%        %@.                                        
+                                              .%%.           .%%.                                     
+                                             *@-               -@*                                    
+                                           =@=                   =@=                                   
+                                         -@*                       *@-                                 
+                                     . :@#          .*%%*.           #@: .                             
+                                   .{self.third_base}{self.third_base}{self.third_base}{self.third_base}.           +@@@@@@+          {self.first_base}{self.first_base}{self.first_base}{self.first_base}                           
+                                  :{self.third_base}{self.third_base}{self.third_base}{self.third_base}{self.third_base}{self.third_base}-          @@@@@@@@          -{self.first_base}{self.first_base}{self.first_base}{self.first_base}{self.first_base}{self.first_base}:                            
                                     {self.third_base}{self.third_base}{self.third_base}            *@@@@@@*            {self.first_base}{self.first_base}{self.first_base}                              
-                                    :. -@*          :*@@*:          *@- :.                               
-                                          +@=                      =@+                                    
-                                            *@:                  :@*                                      
-                                            .#@.              :@#.                                       
+                                      :. -@*          :*@@*:          *@- :.                               
+                                          +@=                       =@+                                    
+                                            *@:                   :@*                                      
+                                            .#@.               :@#.                                       
                                               :%#.          .#%:                                         
-                                                -@*        *@-                                           
-                                                  =@= :: =@=
+                                                -@*       *@-                                           
+                                                  =@= ::=@=
                                                     *{home_plate}{home_plate}{home_plate}{home_plate}*                                               
-                                                  :{home_plate}{home_plate}{home_plate}{home_plate}{home_plate}{home_plate}:                                              
-                                                    -{home_plate}{home_plate} =                                                 
-                                                      .
+                                                   :{home_plate}{home_plate}{home_plate}{home_plate}{home_plate}{home_plate}:                                              
+                                                    -{home_plate}{home_plate}  =                                                 
+                                                       .
                                                                                                                                                                           
         """
         print(self.baseball_field)
