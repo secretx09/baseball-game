@@ -1,3 +1,5 @@
+#This only works on a TI-84 Plus CE Python Edition
+
 import random
 
 class Field:
